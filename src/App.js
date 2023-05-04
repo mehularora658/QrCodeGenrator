@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import QRCode from "qrcode";
+import "./App.css";
 
 function App() {
+  const [qrCodeData, setqrCodeData] = useState("");
+  const [qrCodeImage, setqrCodeImage] = useState("");
+  const genrateQr = () => {
+    QRCode.toDataURL(qrCodeData, (err, url) => {
+      if (err) console.log("Error occured");
+      setqrCodeImage(url);
+    });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <>
+      <h1 className="mainHeading">QR Code Genrator</h1>
+      <div className="box">
+        <input
+          type="text"
+          value={qrCodeData}
+          placeholder="Enter something..."
+          onChange={(e) => {
+            setqrCodeData(e.target.value);
+          }}
+        />
+        <button onClick={genrateQr}>Genrate</button>
+      </div>
+      <div className="QRconatiner">
+        <img src={qrCodeImage} alt="" />
+        <a href={qrCodeImage} download="qrcode.png">
+          <button>Download</button>
         </a>
-      </header>
-    </div>
+      </div>
+    </>
   );
 }
 
