@@ -1,3 +1,6 @@
+# Hello i am mehul198
+
+
 # QR Code Generator
 
 A application that allows users to create QR codes easily and quickly.Users can enter data such as a website URL, contact information, or any other data they want to encode into a QR code.
